@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from mangum import Mangum
+# from mangum import Mangum
 
 app = FastAPI()
 
@@ -7,4 +7,4 @@ app = FastAPI()
 def read_root():
     return {"message": "Hello, World!"}
 
-handler = Mangum(app)
+# handler = Mangum(app)
