@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import joblib 
+# import joblib 
 from motor.motor_asyncio import AsyncIOMotorClient
 
 app = FastAPI()
@@ -45,7 +45,7 @@ class User(BaseModel):
 
 @app.post("/users")
 async def create_user(user: User):
-    user_dict = user.model_dump()
+    user_dict = user.dict()
     result = await users_collection.insert_one(user_dict)
 
     return {"id": str(result.inserted_id), "message": "User created successfully"}
