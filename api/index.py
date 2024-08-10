@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 # import joblib 
+from fastapi.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 
 app = FastAPI()
@@ -13,6 +14,19 @@ db = client.codeathon
 users_collection = db.Users
 
 # model = joblib.load("model.pkl")
+
+origins = [
+    "http://localhost:3000",  # React app
+    "https://your-production-domain.com"  # Add your production domain here
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class RequestData(BaseModel):
     time: str
